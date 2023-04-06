@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .div1 {
+      padding: 10px 20px ;
+      margin: 8px 0;
+
+    }
+
+    .div2 {
+      display: flex;
+  justify-content: space-between;
+      padding: 10px 20px ;
+      margin: 0 auto;
+      max-width: 700px;
+
+
+    }
+
+    .div3 {
+      padding: 0px 20px;
+      margin: 10px 0;
+
+    }
+
+    .reload-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .reload-button:hover {
+      background-color: #3e8e41;
+    }
+
+
+    .submit-btn {
+      background-color: #2dabff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+    }
+
+    .submit-btn:hover {
+      background-color: #077ac7;
+    }
+
+    /* ------------text box  --------- */
+    #x,
+    #y {
+      border: 1px solid #cccccc;
+      outline: 0;
+      height: 30px;
+      width: 100px;
+      border-radius: 4px 0 0 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    /* input[type=number] {
+          width: 100%;
+         
+         
+          box-sizing: border-box;
+        } */
+  </style>
+</head>
+
+<body>
+  <div class="div1">
+    <canvas id="myCanvas" width="500" height="500"></canvas> <br>
+  </div>
+
+
+  <div class="div2">
+
+    <form id="myForm">
+      <!-- ----------  bomb1 -->
+      <label for="bomb1_latitude_x">bomb1 x</label>
+      <input type="number" id="bomb1_latitude_x" name="bomb1_latitude_x" step="any">
+      <label for="bomb1_longitude_y">bomb1 y</label>
+      <input type="number" id="bomb1_longitude_y" name="bomb1_longitude_y" step="any"><br>
+
+      <!-- ----------  bomb2 -->
+      <label for="bomb2_latitude_x">bomb2 x</label>
+      <input type="number" id="bomb2_latitude_x" name="bomb2_latitude_x" step="any">
+      <label for="bomb2_longitude_y">bomb2 y</label>
+      <input type="number" id="bomb2_longitude_y" name="bomb2_longitude_y" step="any"><br>
+
+
+      <!-- ----------  target -->
+      <label for="target_latitude_x">target x</label>
+      <input type="number" id="target_latitude_x" name="target_latitude_x" step="any">
+      <label for="target_longitude_y">target y</label>
+      <input type="number" id="target_longitude_y" name="target_longitude_y" step="any"><br>
+
+      <br>
+      <div class="div3">
+
+        <input type="submit" value="Submit" class="submit-btn">
+        <button class="reload-button" onclick="reloadPage()">Reload Page</button>
+
+
+      </div>
+      <p id="mean_latitude_x"></p>
+      <p id="mean_longitude_y"></p>
+
+
+      <p id="difference"></p>
+
+      <p id="latitude_tuning"></p>
+      <p id="longitude_tuning"></p>
+
+      <p id="positions"></p>
+
+    </form>
+  </div>
+
+
+
+
+
+  <script>
+    var form = document.getElementById("myForm");
+    //   reload 
+    function reloadPage() {
+      location.reload();
+    }
+
+    
+    // ---------------------------------------------------------------------
+
+    function drawCoordinateSystem() {
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+
+      // Draw x 
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height);
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.stroke();
+      //and y axis
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(0, canvas.height);
+      ctx.stroke();
+
+
+      // Label the axes
+      ctx.font = "16px Arial";
+      ctx.fillText("longitude = x", canvas.width - 100, canvas.height - 10);
+      ctx.fillText("y =  latitude", 0 + 10, 0 + 20);
+    }
+    // drawCoordinateSystem();
+    // 
+    // ---------------------------   plot x and y    ------------------------------------------
+    // 
+
+
+    function plotPoint(x, y, text) {
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+
+      // Convert coordinates to canvas coordinates
+      var canvasX = 0 + x;
+      var canvasY = canvas.height - y;
+
+      // Draw point
+      ctx.beginPath();
+      ctx.arc(canvasX, canvasY, 3, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.font = "16px Arial";
+      ctx.fillText(text, canvasX +4, canvasY+4);
+      // ctx.fillText("y", 0 + 10, 0 + 10);
+    }
+
+
+function drawLine(ctx, xx1, yy1, xx2,yy2, stroke = 'black', width = 3) {
+  var canvas = document.getElementById("myCanvas");
+      // var ctx = canvas.getContext("2d"); 
+  //converted axis
+      var x1 = 0 + xx1;
+      var y1 = canvas.height - yy1;
+
+      var x2 = 0 + xx2;
+      var y2 = canvas.height - yy2;
+        // start a new path
+        var dx = x2 - x1;
+        var dy = y2 - y1;
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        ctx.beginPath();
+
+        // place the cursor from the point the line should be started 
+        ctx.moveTo(x1, y1);
+
+        // draw a line from current cursor position to the provided x,y coordinate
+        ctx.lineTo(x2, y2);
+
+        // set strokecolor
+        ctx.strokeStyle = stroke;
+
+        // set lineWidht 
+        ctx.lineWidth = width;
+
+        // add stroke to the line 
+        ctx.stroke();
+
+        ctx.font = "12px Arial";
+        ctx.fillStyle = "red";
+        ctx.fillText("Distance: " + distance.toFixed(5), x1 + dx/2, y1 + dy/2);
+
+      }
+    
+    
+      //  --------------------------------------------------
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      // drawCoordinateSystem();
+      // ============    bom 1 ========================
+      bomb1_latitude_x = parseFloat(document.getElementById("bomb1_latitude_x").value);
+      bomb1_longitude_y = parseFloat(document.getElementById("bomb1_longitude_y").value);
+      console.log(bomb1_latitude_x, "   ", bomb1_longitude_y)
+       plotPoint(bomb1_latitude_x, bomb1_longitude_y, "bomb 1 ");
+      // ============    bom 2 ========================
+      bomb2_latitude_x = parseFloat(document.getElementById("bomb2_latitude_x").value);
+      bomb2_longitude_y = parseFloat(document.getElementById("bomb2_longitude_y").value);
+      console.log(bomb2_latitude_x, "   ", bomb2_longitude_y)
+       plotPoint(bomb2_latitude_x, bomb2_longitude_y, "bomb 2");
+       // ============    target ========================
+      target_latitude_x = parseFloat(document.getElementById("target_latitude_x").value);
+      target_longitude_y = parseFloat(document.getElementById("target_longitude_y").value);
+      console.log(target_latitude_x, "   ", target_longitude_y)
+       plotPoint(target_latitude_x, target_longitude_y, "target");
+
+
+       // mean of x of bom1 & 2
+       var mean_latitude_x  = (bomb1_latitude_x + bomb2_latitude_x)/2;
+       console.log("mean_latitude_x   ",mean_latitude_x)
+       // mean of y of bom1 & 2
+       var mean_longitude_y  = (bomb1_longitude_y + bomb2_longitude_y)/2
+       console.log("mean_longitude_y   ",mean_longitude_y)
+       document.getElementById("mean_latitude_x").innerHTML = "mean latitude (bomb 1 & 2) : " +mean_latitude_x   ;
+       document.getElementById("mean_longitude_y").innerHTML = "mean longitude  (bomb 1 & 2) : " +mean_longitude_y   ;
+
+
+
+       var c = document.getElementById("myCanvas");
+          ctx = c.getContext('2d');
+       drawLine(ctx,target_latitude_x,target_longitude_y, mean_latitude_x, mean_longitude_y );
+
+      //  diffrence if mean and target
+      // x
+      diffx = (target_latitude_x - mean_latitude_x).toFixed(5);
+      console.log("diffx   ",diffx)
+
+      // y
+      diffy = (target_longitude_y - mean_longitude_y).toFixed(5);
+      console.log("diffy   ",diffy)
+
+      document.getElementById("difference").innerHTML = "difference between mean and latitude  = " +diffy +"<br> "+"difference between mean and longitude = " +diffx ;
+
+
+
+      console.log(diffx, " ---- ", diffy)
+
+
+        if (diffx < 0) {
+            document.getElementById("latitude_tuning").innerHTML = "DOWN (-) : " +diffx   ;
+          
+        } else  {
+        document.getElementById("latitude_tuning").innerHTML = "UP (+) : " +diffx   ;
+         }
+        //  ----------------------------------------------
+        if (diffy < 0) {
+            document.getElementById("longitude_tuning").innerHTML = "LEFT (-) : " +diffy   ;
+          
+        } else  {
+        document.getElementById("longitude_tuning").innerHTML = "RIGHT (+) : " +diffy   ;
+         }
+
+
+      // document.getElementById("positions").innerHTML = "difference between mean and latitude  = " +diffy +"<br> "+"difference between mean and longitude = " +diffx ;
+
+
+    
+    }
+    )
+
+    // ---------------------------------------------------------------------
+
+    window.addEventListener("load", drawCoordinateSystem);
+
+
+
+
+  </script>
+
+</body>
+
+</html>
