@@ -76,7 +76,7 @@
 
 <body>
   <div class="div1">
-    <canvas id="myCanvas" width="500" height="500"></canvas> <br>
+    <canvas id="myCanvas" width="500" height="500"  ></canvas> <br>
   </div>
 
 
@@ -85,22 +85,22 @@
     <form id="myForm">
       <!-- ----------  bomb1 -->
       <label for="bomb1_latitude_x">bomb1 x</label>
-      <input type="number" id="bomb1_latitude_x" name="bomb1_latitude_x" step="any">
+      <input type="number" id="bomb1_latitude_x" name="bomb1_latitude_x" step="any" value="28.60980">
       <label for="bomb1_longitude_y">bomb1 y</label>
-      <input type="number" id="bomb1_longitude_y" name="bomb1_longitude_y" step="any"><br>
+      <input type="number" id="bomb1_longitude_y" name="bomb1_longitude_y" step="any" value="73.85280"><br>
 
       <!-- ----------  bomb2 -->
       <label for="bomb2_latitude_x">bomb2 x</label>
-      <input type="number" id="bomb2_latitude_x" name="bomb2_latitude_x" step="any">
+      <input type="number" id="bomb2_latitude_x" name="bomb2_latitude_x" step="any" value="20.61060">
       <label for="bomb2_longitude_y">bomb2 y</label>
-      <input type="number" id="bomb2_longitude_y" name="bomb2_longitude_y" step="any"><br>
+      <input type="number" id="bomb2_longitude_y" name="bomb2_longitude_y" step="any" value="73.85180"><br>
 
 
       <!-- ----------  target -->
       <label for="target_latitude_x">target x</label>
-      <input type="number" id="target_latitude_x" name="target_latitude_x" step="any">
+      <input type="number" id="target_latitude_x" name="target_latitude_x" step="any" value="28.61120">
       <label for="target_longitude_y">target y</label>
-      <input type="number" id="target_longitude_y" name="target_longitude_y" step="any"><br>
+      <input type="number" id="target_longitude_y" name="target_longitude_y" step="any" value="73.85220"><br>
 
       <br>
       <div class="div3">
@@ -266,7 +266,7 @@ function drawLine(ctx, xx1, yy1, xx2,yy2, stroke = 'black', width = 3) {
       diffy = (target_longitude_y - mean_longitude_y).toFixed(5);
       console.log("diffy   ",diffy)
 
-      document.getElementById("difference").innerHTML = "difference between mean and latitude  = " +diffy +"<br> "+"difference between mean and longitude = " +diffx ;
+      document.getElementById("difference").innerHTML = "difference between mean and latitude  = " +diffx +"<br> "+"difference between mean and longitude = " +diffy ;
 
 
 
