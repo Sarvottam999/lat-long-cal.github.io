@@ -84,23 +84,29 @@
 
     <form id="myForm">
       <!-- ----------  bomb1 -->
-      <label for="bomb1_latitude_x">bomb1 x</label>
-      <input type="number" id="bomb1_latitude_x" name="bomb1_latitude_x" step="any" value="28.60980">
-      <label for="bomb1_longitude_y">bomb1 y</label>
-      <input type="number" id="bomb1_longitude_y" name="bomb1_longitude_y" step="any" value="73.85280"><br>
+      
+            <label for="bomb1_latitude_y">bomb1 lati y</label>
+      <input type="number" id="bomb1_latitude_y" name="bomb1_latitude_y" step="any" >
+      <label for="bomb1_longitude_x">bomb1  long x</label>
+      <input type="number" id="bomb1_longitude_x" name="bomb1_longitude_x" step="any"  > <br>
+
 
       <!-- ----------  bomb2 -->
-      <label for="bomb2_latitude_x">bomb2 x</label>
-      <input type="number" id="bomb2_latitude_x" name="bomb2_latitude_x" step="any" value="20.61060">
-      <label for="bomb2_longitude_y">bomb2 y</label>
-      <input type="number" id="bomb2_longitude_y" name="bomb2_longitude_y" step="any" value="73.85180"><br>
+      
+            <label for="bomb2_latitude_y">bomb2 lati y</label>
+      <input type="number" id="bomb2_latitude_y" name="bomb2_latitude_y" step="any"  >
+      <label for="bomb2_longitude_x">bomb2 long x</label>
+      <input type="number" id="bomb2_longitude_x" name="bomb2_longitude_x" step="any"  ><br>
+
 
 
       <!-- ----------  target -->
-      <label for="target_latitude_x">target x</label>
-      <input type="number" id="target_latitude_x" name="target_latitude_x" step="any" value="28.61120">
-      <label for="target_longitude_y">target y</label>
-      <input type="number" id="target_longitude_y" name="target_longitude_y" step="any" value="73.85220"><br>
+      
+            <label for="target_latitude_y">target lati y</label>
+      <input type="number" id="target_latitude_y" name="target_latitude_y" step="any"  >
+      <label for="target_longitude_x">target long x</label>
+      <input type="number" id="target_longitude_x" name="target_longitude_x" step="any"  > <br>
+
 
       <br>
       <div class="div3">
@@ -110,8 +116,8 @@
 
 
       </div>
-      <p id="mean_latitude_x"></p>
-      <p id="mean_longitude_y"></p>
+      <p id="mean_latitude_y"></p>
+      <p id="mean_longitude_x"></p>
 
 
       <p id="difference"></p>
@@ -226,69 +232,99 @@ function drawLine(ctx, xx1, yy1, xx2,yy2, stroke = 'black', width = 3) {
       event.preventDefault(); // Prevent the default form submission behavior
       // drawCoordinateSystem();
       // ============    bom 1 ========================
-      bomb1_latitude_x = parseFloat(document.getElementById("bomb1_latitude_x").value);
-      bomb1_longitude_y = parseFloat(document.getElementById("bomb1_longitude_y").value);
-      console.log(bomb1_latitude_x, "   ", bomb1_longitude_y)
-       plotPoint(bomb1_latitude_x, bomb1_longitude_y, "bomb 1 ");
+      bomb1_latitude_y = parseFloat(document.getElementById("bomb1_latitude_y").value);
+      bomb1_longitude_x = parseFloat(document.getElementById("bomb1_longitude_x").value);
+      console.log(bomb1_latitude_y, "   ", bomb1_longitude_x)
+       plotPoint(
+         bomb1_longitude_x,
+
+        bomb1_latitude_y,
+          "bomb 1 ");
       // ============    bom 2 ========================
-      bomb2_latitude_x = parseFloat(document.getElementById("bomb2_latitude_x").value);
-      bomb2_longitude_y = parseFloat(document.getElementById("bomb2_longitude_y").value);
-      console.log(bomb2_latitude_x, "   ", bomb2_longitude_y)
-       plotPoint(bomb2_latitude_x, bomb2_longitude_y, "bomb 2");
+      bomb2_latitude_y = parseFloat(document.getElementById("bomb2_latitude_y").value);
+      bomb2_longitude_x = parseFloat(document.getElementById("bomb2_longitude_x").value);
+      console.log(bomb2_latitude_y, "   ", bomb2_longitude_x)
+       plotPoint(
+         bomb2_longitude_x,
+        bomb2_latitude_y,
+          "bomb 2");
        // ============    target ========================
-      target_latitude_x = parseFloat(document.getElementById("target_latitude_x").value);
-      target_longitude_y = parseFloat(document.getElementById("target_longitude_y").value);
-      console.log(target_latitude_x, "   ", target_longitude_y)
-       plotPoint(target_latitude_x, target_longitude_y, "target");
+      target_latitude_y = parseFloat(document.getElementById("target_latitude_y").value);
+      target_longitude_x = parseFloat(document.getElementById("target_longitude_x").value);
+      console.log(target_latitude_y, "   ", target_longitude_x)
+
+
+       plotPoint(
+        target_longitude_x, 
+        target_latitude_y,
+        "target");
 
 
        // mean of x of bom1 & 2
-       var mean_latitude_x  = (bomb1_latitude_x + bomb2_latitude_x)/2;
-       console.log("mean_latitude_x   ",mean_latitude_x)
+             
+       var mean_longitude_x  = (bomb1_longitude_x + bomb2_longitude_x)/2
+       console.log("mean_longitude_x   ",mean_longitude_x)
+      
        // mean of y of bom1 & 2
-       var mean_longitude_y  = (bomb1_longitude_y + bomb2_longitude_y)/2
-       console.log("mean_longitude_y   ",mean_longitude_y)
-       document.getElementById("mean_latitude_x").innerHTML = "mean latitude (bomb 1 & 2) : " +mean_latitude_x   ;
-       document.getElementById("mean_longitude_y").innerHTML = "mean longitude  (bomb 1 & 2) : " +mean_longitude_y   ;
+        var mean_latitude_y  = (bomb1_latitude_y + bomb2_latitude_y)/2;
+       console.log("mean_latitude_y   ",mean_latitude_y)
+
+ 
+
+
+
+       document.getElementById("mean_longitude_x").innerHTML = "mean longitude  (bomb 1 & 2) : " +mean_longitude_x   ;
+       document.getElementById("mean_latitude_y").innerHTML = "mean latitude (bomb 1 & 2) : " +mean_latitude_y   ;
 
 
 
        var c = document.getElementById("myCanvas");
           ctx = c.getContext('2d');
-       drawLine(ctx,target_latitude_x,target_longitude_y, mean_latitude_x, mean_longitude_y );
+       drawLine(ctx,
+       target_longitude_x, 
+
+       target_latitude_y,
+       mean_longitude_x ,
+
+       mean_latitude_y
+
+       );
 
       //  diffrence if mean and target
+      
+
       // x
-      diffx = (target_latitude_x - mean_latitude_x).toFixed(5);
-      console.log("diffx   ",diffx)
+      diff_long_x = (target_longitude_x - mean_longitude_x).toFixed(5);
+      console.log("diff_long_x   ",diff_long_x)
 
-      // y
-      diffy = (target_longitude_y - mean_longitude_y).toFixed(5);
-      console.log("diffy   ",diffy)
-
-      document.getElementById("difference").innerHTML = "difference between mean and latitude  = " +diffx +"<br> "+"difference between mean and longitude = " +diffy ;
+      //y
+      diff_lati_y = (target_latitude_y - mean_latitude_y).toFixed(5);
+      console.log("diff_lati_y   ",diff_lati_y)
 
 
+      document.getElementById("difference").innerHTML = "difference between mean and longitude  = " +diff_long_x +"<br> "+"difference between mean and letitude = " +diff_lati_y ;
 
-      console.log(diffx, " ---- ", diffy)
 
 
-        if (diffx < 0) {
-            document.getElementById("latitude_tuning").innerHTML = "DOWN (-) : " +diffx   ;
+      console.log(diff_long_x, " ---- ", diff_lati_y)
+
+
+        if (diff_long_x < 0) {
+            document.getElementById("longitude_tuning").innerHTML = "LEFT (-) : " +diff_long_x   ;
           
         } else  {
-        document.getElementById("latitude_tuning").innerHTML = "UP (+) : " +diffx   ;
+        document.getElementById("longitude_tuning").innerHTML = "RIGHT (+) : " +diff_long_x   ;
          }
         //  ----------------------------------------------
-        if (diffy < 0) {
-            document.getElementById("longitude_tuning").innerHTML = "LEFT (-) : " +diffy   ;
+        if (diff_lati_y < 0) {
+            document.getElementById("latitude_tuning").innerHTML = "DOWN (-) : " +diff_lati_y   ;
           
         } else  {
-        document.getElementById("longitude_tuning").innerHTML = "RIGHT (+) : " +diffy   ;
+        document.getElementById("latitude_tuning").innerHTML = "UP (+) : " +diff_lati_y   ;
          }
 
 
-      // document.getElementById("positions").innerHTML = "difference between mean and latitude  = " +diffy +"<br> "+"difference between mean and longitude = " +diffx ;
+      // document.getElementById("positions").innerHTML = "difference between mean and latitude  = " +diff_lati_y +"<br> "+"difference between mean and longitude = " +diff_long_x ;
 
 
     
