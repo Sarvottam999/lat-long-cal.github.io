@@ -1,0 +1,65 @@
+#head{ 
+	/* font-family: "Arial"; */
+    background-color: #f4511e; /* Orange */
+    color: #ffffff;
+ 
+
+
+} 
+
+table td {
+    position: relative;
+  }
+  
+  table td input {
+    position: absolute;
+    display: block;
+    top:0;
+    left:0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* .canvas_wrap{
+    height: 400;
+    width: 100%;
+  } */
+
+  #canvas{
+    border: 5px solid rgb(0, 0, 0); 
+    width : 100%;
+     height :  100px;
+  }
+
+  
+@media screen and (min-width:761px) {
+  #canvas{
+    width : 761px;
+    height :  761px;
+  }   
+}
+
+@media screen and (max-width:760px) {
+  #canvas{
+    width : 500px;
+    height :  500px;
+  }   
+}
+
+@media screen and (max-width:480px) {
+  #canvas{
+    width : 300px;
+    height :  300px;
+  }   
+}
+
+@media screen and (max-width:360px) {
+  #canvas{
+    width :   100px;
+    height :  100px;
+  }   
+}
