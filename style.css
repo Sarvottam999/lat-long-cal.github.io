@@ -52,7 +52,8 @@ table td {
     width : 100%;
      height :  100px;
      
-     background-image: url('./fire2.jpeg');
+          background-image:linear-gradient(rgba(174, 174, 174, 0.75),rgba(244, 244, 244, 0.75)) ,url('./fire2.jpeg');
+
      background-repeat: no-repeat;
      background-size: cover;
   }
