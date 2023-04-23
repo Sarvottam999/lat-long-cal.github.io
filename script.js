@@ -33,8 +33,8 @@ function d_tf1( ) {
       // ============    bom 1 ========================
       bomb1_latitude_y = parseFloat(document.getElementById("bomb1_latitude_y").value);
       bomb1_longitude_x = parseFloat(document.getElementById("bomb1_longitude_x").value);
-        diff_t_f1_lat = target_latitude_y-bomb1_latitude_y;
-        diff_t_f1_log = target_longitude_x-bomb1_longitude_x;
+        diff_t_f1_lat = (target_latitude_y-bomb1_latitude_y).toFixed(5);
+        diff_t_f1_log = (target_longitude_x-bomb1_longitude_x).toFixed(5);
 
         document.getElementById("diff_t_f1_lat").value = diff_t_f1_lat;
         document.getElementById("diff_t_f1_log").value = diff_t_f1_log;
@@ -71,8 +71,8 @@ function d_tf1( ) {
          // ============    bom 2 ========================
       bomb2_latitude_y = parseFloat(document.getElementById("bomb2_latitude_y").value);
       bomb2_longitude_x = parseFloat(document.getElementById("bomb2_longitude_x").value);
-      diff_t_f2_lat = target_latitude_y-bomb2_latitude_y;
-      diff_t_f2_log = target_longitude_x-bomb2_longitude_x;
+      diff_t_f2_lat = (target_latitude_y-bomb2_latitude_y).toFixed(5);
+      diff_t_f2_log = (target_longitude_x-bomb2_longitude_x).toFixed(5);
 
       document.getElementById("diff_t_f2_lat").value = diff_t_f2_lat;
         document.getElementById("diff_t_f2_log").value = diff_t_f2_log;
@@ -160,8 +160,8 @@ function d_tf1( ) {
       // ============    bom 2 ========================
       mpi_latitude_y = parseFloat(document.getElementById("mpi_latitude_y").value);
       mpi_longitude_x = parseFloat(document.getElementById("mpi_longitude_x").value);
-      mpi_lat_diff_t = target_latitude_y- mpi_latitude_y;
-      mpi_log_diff_t = target_longitude_x-mpi_longitude_x;
+      mpi_lat_diff_t = (target_latitude_y- mpi_latitude_y).toFixed(5);
+      mpi_log_diff_t = (target_longitude_x-mpi_longitude_x).toFixed(5);
 
 
      document.getElementById("mpi_log").value = mpi_longitude_x;
